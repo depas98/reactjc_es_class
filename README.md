@@ -1,2 +1,2 @@
-# reactjc_es_class
+# Reactjs Class
 Reactjs in easy steps class examples
