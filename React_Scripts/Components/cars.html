@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Cars</title>
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+    </head>
+
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            
+            class RowCreator extends React.Component{
+                render(){
+
+                    var tdStyle = {
+                        border: 1,
+                        borderStyle: "solid",
+                        borderColor: "black",                        
+                        height: 50,
+                        textAlign: "center"
+                    }; 
+
+                    var car = this.props.item;
+
+                    return <tr>
+                                <td style={tdStyle}>{car.make}</td>
+                                <td style={tdStyle}>{car.model}</td>
+                                <td style={tdStyle}>{car.year}</td>
+                            </tr>   
+                }
+            }
+
+            class Cars extends React.Component{
+                render(){     
+                    var cars = [
+                                {
+                                    make: "BMW",
+                                    model: "X2",
+                                    year : "2000"
+                                },
+                                {
+                                    make: "BMW",
+                                    model: "X6",
+                                    year : "2003"
+                                },
+                                {
+                                    make: "Venza",
+                                    model: "X8",
+                                    year : "2000"
+                                },
+                                {
+                                    make: "Acura",
+                                    model: "MDX",
+                                    year : "2000"
+                                }                                  
+                            ];
+
+                    var tableStyle = {
+                        border: 1,
+                        width: 200
+                    };
+
+                    var thStyle = {
+                        border: 1,
+                        borderStyle: "solid",
+                        borderColor: "black",
+                        height: 30,
+                        textAlign: "center"
+                    };      
+              
+                    return <div>
+                        {this.props.title}
+                        <table style={tableStyle}>
+                            <thead style={thStyle}>
+                                <tr>
+                                    <td style={thStyle}>Make</td>
+                                    <td style={thStyle}>Model</td>
+                                    <td style={thStyle}>Year</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {cars.map(car => 
+                                    <RowCreator item={car}/>
+                                )}                           
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            } 
+
+            ReactDOM.render(<div><Cars title="List Of Cars"/></div>,document.getElementById("root"));
+        </script>
+    </body>
+</html>

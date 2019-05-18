@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Cars</title>
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+    </head>
+
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            
+            class RowCreator extends React.Component{
+                render(){
+
+                    var car = this.props.item;
+
+                    return <tr>
+                                <td>{car.make}</td>
+                                <td>{car.model}</td>
+                                <td>{car.year}</td>
+                            </tr>   
+                }
+            }
+
+            const CARS = [{make: "BMW", model: "X2", year : "2000"}];
+
+            class Cars extends React.Component{
+
+                constructor(props){
+                    super(props);
+                    this.state = {cars:CARS};
+                }
+
+                handleUpdate(e){
+                    var carArr = this.state.cars;
+                    carArr.push({ make: "HONDA", model: "Accord", year: "2019" });
+                    this.setState({cars:carArr});
+                }
+
+                render(){     
+                    return <div>
+                        {this.props.title}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Make</td>
+                                    <td>Model</td>
+                                    <td>Year</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.cars.map(car => 
+                                    <RowCreator item={car}/>
+                                )}                           
+                            </tbody>
+                        </table>
+                        <input type="button" value="update" onClick={e => this.handleUpdate(e)}/>
+                    </div>
+                }
+            } 
+
+            ReactDOM.render(<div><Cars title="List Of Cars"/></div>,document.getElementById("root"));
+        </script>
+    </body>
+</html>
